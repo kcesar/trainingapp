@@ -83,8 +83,11 @@ var appRoot = '@Url.Content("~/").TrimEnd('/')'; var databaseRoot = '@(_config["
     <script src="~/lib/angular-jk-carousel/dist/jk-carousel.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
     <script src="~/lib/oidc-client/dist/oidc-client.min.js"></script>
-    <script type="text/javascript">window._trackJs = { token: 'efc00a2078b0462aa24df20c1b971687' };</script>
-    <script type="text/javascript" src="https://cdn.trackjs.com/releases/current/tracker.js"></script>
+    @if (!string.IsNullOrWhiteSpace(_config["trackjs:token"]))
+    {
+      <script type="text/javascript">window._trackJs = { token: "@_config["trackjs:token"]", application: "@_config["trackjs:app"]" };</script>
+      <script type="text/javascript" src="https://cdn.trackjs.com/releases/current/tracker.js"></script>
+    }
     <script src="~/js/site.min.js" asp-append-version="true"></script>
   </environment>
   @RenderSection("scripts", required: false)
